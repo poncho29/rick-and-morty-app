@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-center my-5">
+  <div class="card mb-2" style="width: 25rem;">
+    <img [src]="character.image" class="card-img-top" [alt]="character.name">
+    <div class="card-body">
+      <h5 class="card-title text-center">{{ character.name }}</h5>
+      <p class="card-text">
+        <span class="fw-bold">Status: </span>
+        {{ character.status }}
+        <span>{{ character.status === 'Alive' ? '🟢' : '🔴' }}</span>
+      </p>
+      <p class="card-text">
+        <span class="fw-bold">Specie: </span> {{ character.species }}
+      </p>
+      <p class="card-text">
+        <span class="fw-bold">Gender: </span> {{ character.gender }}
+      </p>
+      <p class="card-text">
+        <span class="fw-bold">Location: </span>
+        {{ character.location.name }}
+      </p>
+    </div>
+  </div>
+</div>
