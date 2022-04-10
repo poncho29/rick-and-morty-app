@@ -14,6 +14,8 @@ import { CharactersService } from '../../services/characters/characters.service'
 })
 export class InfoCharacterComponent implements OnInit {
 
+  show: boolean = false;
+
   character: Character = {
     id: 0,
     name: "",
@@ -44,9 +46,11 @@ export class InfoCharacterComponent implements OnInit {
     this.activatedRoute.params
       .pipe(
         switchMap(({ id }) => this.charactersService.getCharacter(id)),
-        tap(console.log)
+        // tap(console.log)
       )
-      .subscribe((resp) => this.character = resp)
+      .subscribe((resp) => {
+        this.character = resp;
+      })
   }
 
 }

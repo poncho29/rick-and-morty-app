@@ -29,4 +29,9 @@ export class CharactersService {
   prevPage(prev?: any) {
     return this.http.get<FetchRickMortyResponse>(prev);
   }
+
+  searchCharacter(name: string) {
+    const apiSearch = `${this.apiUrl}/character/?name=${name}`;
+    return this.http.get<FetchRickMortyResponse>(apiSearch);
+  }
 }

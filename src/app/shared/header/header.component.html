@@ -14,23 +14,42 @@
              routerLink="/"
              routerLinkActive="active">Home</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link"
              aria-current="page"
-             routerLink="/"
+             routerLink="/3"
              routerLinkActive="active">Episodes</a>
         </li>
         <li class="nav-item">
           <a class="nav-link "
              aria-current="page"
-             routerLink="/"
+             routerLink="/4"
              routerLinkActive="active">Locations</a>
-        </li>
+        </li> -->
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <div>
+        <form class="d-flex"
+              *ngIf="show"
+              (ngSubmit)="search()"
+              autocomplete="off">
+          <input type="text"
+                 name="nameCharacter"
+                 [(ngModel)]="nameCharacter"
+                 aria-label="Search"
+                 class="form-control me-2"
+                 placeholder="Search Character"
+          >
+          <!-- (input)="keyPress()" -->
+        </form>
+
+        <!-- <ul class="list-group debouncer">
+          <li class="list-group-item list-group-item-action"
+              *ngFor="let character of charactersSugeridos">
+              {{ character.name }}
+          </li>
+        </ul> -->
+
+      </div>
     </div>
   </div>
 </nav>

@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { HomeComponent } from './pages/home/home.component';
 import { CharacterComponent } from './components/character/character.component';
 import { InfoCharacterComponent } from './pages/info-character/info-character.component';
-import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,8 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ],
   exports: [
     HomeComponent

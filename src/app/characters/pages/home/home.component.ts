@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Character } from '../../interfaces/character.model';
 
@@ -12,12 +11,15 @@ import { CharactersService } from '../../services/characters/characters.service'
 })
 export class HomeComponent implements OnInit {
 
+  show: boolean = true;
+  loadData: boolean = true;
+  error: boolean = false;
   next: string = '';
   prev: string | null = null;
+  nameCharacter: string = '';
   characters: Character[] = [];
 
   constructor(
-    private router: Router,
     private charactersService: CharactersService
   ) { }
 
@@ -27,17 +29,19 @@ export class HomeComponent implements OnInit {
         this.characters = resp.results;
         this.next = resp.info.next;
         this.prev = resp.info.prev;
-        console.log(this.prev)
+        this.loadData = false;
       })
   }
 
   nextPage() {
+    this.loadData = true;
     if(this.next !== null) {
       this.charactersService.nextPage(this.next)
         .subscribe(resp => {
           this.characters = resp.results;
           this.next = resp.info.next;
           this.prev = resp.info.prev;
+          this.loadData = false;
         })
     }
 
@@ -45,15 +49,32 @@ export class HomeComponent implements OnInit {
   }
 
   prevPage() {
+    this.loadData = true;
     if(this.prev !== null) {
       this.charactersService.prevPage(this.prev)
         .subscribe(resp => {
           this.characters = resp.results;
           this.next = resp.info.next;
           this.prev = resp.info.prev;
+          this.loadData = false;
         })
     }
 
     return
+  }
+
+  search( nameCharacter: string ) {
+    this.error = false;
+    this.nameCharacter = nameCharacter;
+
+    this.charactersService.searchCharacter(this.nameCharacter)
+      .subscribe((resp) => {
+        this.characters = resp.results;
+        this.next = resp.info.next;
+        this.prev = resp.info.prev;
+      },
+      (err) => {
+        this.error = true;
+      })
   }
 }
